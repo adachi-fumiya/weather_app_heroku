@@ -48,3 +48,13 @@ td {
   vertical-align: middle;
   width: 33%;
 }
+
+@media screen and (max-width: 959px) {
+	td {
+    width: auto;
+  }
+
+  input {
+    width: 20%;
+  }
+}
