@@ -2,6 +2,10 @@
 margin-top: 3rem;
 }
 
+.search_result {
+  margin: 3rem 0 3rem 0;
+}
+
 .date-end {
   height: 3rem;
   background-color: #fff!important;
@@ -9,4 +13,27 @@ margin-top: 3rem;
 
 table {
   margin-top: 3rem;
+}
+
+.post_code_input {
+  display: flex;
+  align-items: center;
+}
+
+.post_code_input > span {
+  margin: 0 1rem 0 1rem;
+}
+
+.search {
+  margin-left: 2rem;
+}
+
+input {
+  display: block;
+  padding: 0.4rem;
+  width: 15%;
+}
+
+.error_message {
+  color: red;
 }

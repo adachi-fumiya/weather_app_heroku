@@ -11,35 +11,46 @@
 </head>
 <body>
   <div class="container">
-    <form action="" method="post">
-      <div class="form-group">
-        <label>郵便番号を入力してください</label>
-        <input type="text" name="body" class="form-control" placeholder="870-0148">
+    <form action="{{route('weather.index')}}" method="get">
+      <div class="post_code_input">
+        <input type="text" imputmode="numeric" pattern="\d*" name="post_code1" placeholder="870" required>
+        <span>-</span>
+        <input type="text" imputmode="numeric" pattern="\d*" name="post_code2" placeholder="0148" required>
+        <button type="submit" class="btn btn-primary search">検索する</button>
       </div>
-      <button type="submit" class="btn btn-primary">検索する</button>
+      @if (session('error_message'))
+        <div class="error_message">
+          {{ session('error_message') }}
+        </div>
+      @endif
     </form>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <td>日付</td>
-          <td>天気</td>
-          <td>気温</td>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach($result_array['list'] as $r)
+    @if($weather_info)
+    <div class="search_result">
+      <h1>{{$weather_info['city']['name']}}の天気</h1>
+      <table class="table table-striped">
+        <thead>
           <tr>
-            <td>{{date('m月d日 H時',  strtotime($r['dt_txt']))}}</td>
-            <td>{{$r['weather'][0]['description']}}</td>
-            <td>{{round($r['main']['temp'])}}℃</td>
+            <td>日付</td>
+            <td>天気</td>
+            <td>気温</td>
           </tr>
-          @if(date('H',  strtotime($r['dt_txt'])) == 21)
-          <tr class="date-end"><td></td><td></td><td></td></tr>
-          @endif
-        @endforeach
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @foreach($weather_info['list'] as $wi)
+            <tr>
+              <td>{{date('m月d日 H時',  strtotime($wi['dt_txt']))}}</td>
+              <td>{{$wi['weather'][0]['description']}}</td>
+              <td>{{round($wi['main']['temp'])}}℃</td>
+            </tr>
+            @if(date('H',  strtotime($wi['dt_txt'])) == 21)
+            <tr class="date-end"><td></td><td></td><td></td></tr>
+            @endif
+          @endforeach
+        </tbody>
+      </table>
+      @endif
+    </div>
   </div>
 </body>
 </html>
