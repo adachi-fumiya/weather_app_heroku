@@ -6,6 +6,11 @@
   margin: 3rem 0 3rem 0;
 }
 
+.head_tr {
+  background-color: #007bff;
+  color: #fff;
+}
+
 .date-end {
   height: 3rem;
   background-color: #fff!important;
@@ -36,4 +41,10 @@ input {
 
 .error_message {
   color: red;
+}
+
+td {
+  text-align: center;
+  vertical-align: middle;
+  width: 33%;
 }

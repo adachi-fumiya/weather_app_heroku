@@ -42,13 +42,11 @@ class WeatherAPIController extends Controller
         // 接続
         $client = new Client();
         try {
-            $method = "GET";
-            $response = $client->request($method, $url);
+            $response = $client->request('GET', $url);
     
-            $weather_data = $response->getBody();
-            $weather_data = json_decode($weather_data, true);
+            $result = json_decode($response->getBody()->getContents(), true);
     
-            return response()->json($weather_data);
+            return response()->json($result);
         } catch ( \Exception $e ) {
             return 'error';
         }

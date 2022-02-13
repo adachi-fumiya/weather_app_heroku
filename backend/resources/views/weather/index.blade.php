@@ -31,17 +31,25 @@
       <p>{{$place_name->original}}の天気</p>
       <table class="table table-striped">
         <thead>
-          <tr>
+          <tr class="head_tr">
             <td>日付</td>
             <td>天気</td>
             <td>気温</td>
           </tr>
         </thead>
         <tbody>
+          <?php $week = ['日','月','火','水','木','金','土']; ?>
           @foreach($weather_info['list'] as $wi)
+            <?php 
+              $w = date('w',  strtotime($wi['dt_txt']));
+              $convert_week = $week[$w];
+            ?>
             <tr>
-              <td>{{date('m月d日 H時',  strtotime($wi['dt_txt']))}}</td>
-              <td>{{$wi['weather'][0]['description']}}</td>
+              <td>{{date("n/d($convert_week) H時",  strtotime($wi['dt_txt']))}}</td>
+              <td>
+                <!-- <img src="https://openweathermap.org/img/wn/{{$wi['weather'][0]['icon']}}@2x.png" alt=""> -->
+                {{$wi['weather'][0]['description']}}
+              </td>
               <td>{{round($wi['main']['temp'])}}℃</td>
             </tr>
             @if(date('H',  strtotime($wi['dt_txt'])) == 21)
