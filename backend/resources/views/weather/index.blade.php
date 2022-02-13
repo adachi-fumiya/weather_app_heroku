@@ -11,11 +11,12 @@
 </head>
 <body>
   <div class="container">
-    <form action="{{route('weather.index')}}" method="get">
+    <form action="{{route('weather.search')}}" method="post">
+      @csrf
       <div class="post_code_input">
         <input type="text" imputmode="numeric" pattern="\d*" name="post_code1" placeholder="870" required>
         <span>-</span>
-        <input type="text" imputmode="numeric" pattern="\d*" name="post_code2" placeholder="0148" required>
+        <input type="text" imputmode="numeric" pattern="\d*" name="post_code2" placeholder="0026" required>
         <button type="submit" class="btn btn-primary search">検索する</button>
       </div>
       @if (session('error_message'))

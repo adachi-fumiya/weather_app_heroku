@@ -8,7 +8,14 @@ use GuzzleHttp\Client;
 
 class WeatherAPIController extends Controller
 {
-    public function index(Request $request) {
+    public function index() {
+        $weather_info = '';
+        $place_name = '';
+
+        return view('weather.index', compact('weather_info', 'place_name'));
+    }
+
+    public function search(Request $request) {
         $weather_info = '';
         $place_name = '';
 
@@ -17,8 +24,6 @@ class WeatherAPIController extends Controller
         if ($post_code1 && $post_code2) {
             $result = $this->getWeather($post_code1, $post_code2);
             $place_name = $this->getPlaceName($post_code1, $post_code2);
-            
-            // dd($place_name->original);
             if ($result == 'error') {
                 return redirect('/weather')->with('error_message', '郵便番号を正しく入力して下さい。');
             }
