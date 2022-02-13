@@ -27,7 +27,7 @@
 
     @if($weather_info)
     <div class="search_result">
-      <h1>{{$weather_info['city']['name']}}の天気</h1>
+      <p>{{$place_name->original}}の天気</p>
       <table class="table table-striped">
         <thead>
           <tr>
