@@ -11,13 +11,12 @@
 </head>
 <body>
   <div class="container">
-    <form action="{{route('weather.search')}}" method="post">
-      @csrf
+    <form action="{{route('weather.search')}}" method="get">
       <div class="post_code_input">
         <div class="zip">
-          <input type="text" imputmode="numeric" pattern="\d*" maxlength="3" name="post_code1" placeholder="870" required>
+          <input type="text" imputmode="numeric" pattern="\d*" maxlength="3" name="zip1" placeholder="870" required>
           <span>-</span>
-          <input type="text" imputmode="numeric" pattern="\d*" maxlength="4" name="post_code2" placeholder="0026" required>
+          <input type="text" imputmode="numeric" pattern="\d*" maxlength="4" name="zip2" placeholder="0026" required>
         </div>
         <button type="submit" class="btn btn-primary search">検索する</button>
       </div>

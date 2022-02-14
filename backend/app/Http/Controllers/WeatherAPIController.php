@@ -18,26 +18,24 @@ class WeatherAPIController extends Controller
     public function search(Request $request) {
         $weather_info = '';
         $place_name = '';
+        $zip1 = $request->zip1;
+        $zip2 = $request->zip2;
 
-        $post_code1 = $request->post_code1;
-        $post_code2 = $request->post_code2;
-        if ($post_code1 && $post_code2) {
-            $result = $this->getWeather($post_code1, $post_code2);
-            $place_name = $this->getPlaceName($post_code1, $post_code2);
-            if ($result == 'error') {
-                return redirect(route('weather.index'))->with('error_message', "該当する郵便番号が見つかりませんでした。\n再度検索を行ってください。");
-            }
-            $result_json  = $result->content();
-            $weather_info = json_decode($result_json, true);
+        $result = $this->getWeather($zip1, $zip2);
+        $place_name = $this->getPlaceName($zip1, $zip2);
+        if ($result == 'error') {
+            return redirect(route('weather.index'))->with('error_message', "該当する郵便番号が見つかりませんでした。\n再度検索を行ってください。");
         }
+        $result_json  = $result->content();
+        $weather_info = json_decode($result_json, true);
 
         return view('weather.index', compact('weather_info', 'place_name'));
     }
 
-    public function getWeather($post_code1, $post_code2) {
+    public function getWeather($zip1, $zip2) {
         $API_KEY = config('services.openweathermap.key');
         $base_url = config('services.openweathermap.url');
-        $url = "$base_url?units=metric&APPID=$API_KEY&lang=ja&zip=$post_code1-$post_code2,jp";
+        $url = "$base_url?units=metric&APPID=$API_KEY&lang=ja&zip=$zip1-$zip2,jp";
 
         // 接続
         $client = new Client();
@@ -52,7 +50,7 @@ class WeatherAPIController extends Controller
         }
     }
 
-    public function getPlaceName($post_code1, $post_code2) {
+    public function getPlaceName($zip1, $zip2) {
         $url = "https://zipcloud.ibsnet.co.jp/api/search";
 
         $client = new Client();
@@ -62,7 +60,7 @@ class WeatherAPIController extends Controller
                 'Content-Type' => 'application/x-www-form-urlencoded' 
             ],
             'form_params' => [
-                'zipcode' => $post_code1.$post_code2
+                'zipcode' => $zip1.$zip2
             ]
         ];
         $response = $client->request('POST', $url, $option);

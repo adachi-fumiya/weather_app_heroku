@@ -22,5 +22,5 @@ Route::controller(WeatherAPIController::class)->group(function () {
     Route::get('/', 'index')->name('weather.index');
     Route::get('/weatherData', 'getWeather')->name('weather.getWeather');
     Route::get('/getPlaceName', 'getPlaceName')->name('weather.getPlaceName');
-    Route::post('/search', 'search')->name('weather.search');
+    Route::get('/search', 'search')->name('weather.search');
 });
