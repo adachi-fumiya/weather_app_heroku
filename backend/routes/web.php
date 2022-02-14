@@ -14,13 +14,13 @@ use App\Http\Controllers\WeatherAPIController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::controller(WeatherAPIController::class)->group(function () {
-    Route::get('/weather', 'index')->name('weather.index');
-    Route::get('/weather/weatherData', 'getWeather')->name('weather.getWeather');
-    Route::get('/weather/getPlaceName', 'getPlaceName')->name('weather.getPlaceName');
-    Route::post('/weather/search', 'search')->name('weather.search');
+    Route::get('/', 'index')->name('weather.index');
+    Route::get('/weatherData', 'getWeather')->name('weather.getWeather');
+    Route::get('/getPlaceName', 'getPlaceName')->name('weather.getPlaceName');
+    Route::post('/search', 'search')->name('weather.search');
 });

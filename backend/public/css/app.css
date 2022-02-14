@@ -41,6 +41,7 @@ input {
 
 .error_message {
   color: red;
+  margin-top: 0.5rem;
 }
 
 td {
@@ -50,11 +51,24 @@ td {
 }
 
 @media screen and (max-width: 959px) {
-	td {
-    width: auto;
+  td {
+    width: 30%;
+  }
+
+	td:first-child{
+    width: 40%;
   }
 
   input {
     width: 20%;
+  }
+
+  .city_text {
+    text-align: center;
+    margin: 0;
+  }
+
+  .post_code_input {
+    justify-content: center;
   }
 }

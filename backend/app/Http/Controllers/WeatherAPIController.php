@@ -25,7 +25,7 @@ class WeatherAPIController extends Controller
             $result = $this->getWeather($post_code1, $post_code2);
             $place_name = $this->getPlaceName($post_code1, $post_code2);
             if ($result == 'error') {
-                return redirect('/weather')->with('error_message', '郵便番号を正しく入力して下さい。');
+                return redirect(route('weather.index'))->with('error_message', "該当する郵便番号が見つかりませんでした。\n再度検索を行ってください。");
             }
             $result_json  = $result->content();
             $weather_info = json_decode($result_json, true);
@@ -68,7 +68,8 @@ class WeatherAPIController extends Controller
         $response = $client->request('POST', $url, $option);
         $result = json_decode($response->getBody()->getContents(), true);
 
-        if ($result['status'] == 200) {
+        // statusコードが200かつ住所が設定されている場合のみ返す
+        if ($result['status'] == 200 && isset($result['results'][0]['address2'])) {
             return response()->json($result['results'][0]['address2'].$result['results'][0]['address3']);
         } else {
             return 'error';

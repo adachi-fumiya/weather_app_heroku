@@ -14,21 +14,21 @@
     <form action="{{route('weather.search')}}" method="post">
       @csrf
       <div class="post_code_input">
-        <input type="text" imputmode="numeric" pattern="\d*" name="post_code1" placeholder="870" required>
+        <input type="text" imputmode="numeric" pattern="\d*" maxlength="3" name="post_code1" placeholder="870" required>
         <span>-</span>
-        <input type="text" imputmode="numeric" pattern="\d*" name="post_code2" placeholder="0026" required>
+        <input type="text" imputmode="numeric" pattern="\d*" maxlength="4" name="post_code2" placeholder="0026" required>
         <button type="submit" class="btn btn-primary search">検索する</button>
       </div>
       @if (session('error_message'))
         <div class="error_message">
-          {{ session('error_message') }}
+          {!! nl2br(e(session('error_message'))) !!}
         </div>
       @endif
     </form>
 
     @if($weather_info)
     <div class="search_result">
-      <p>{{$place_name->original}}の天気</p>
+      <p class="city_text">{{$place_name->original}}の天気</p>
       <table class="table table-striped">
         <thead>
           <tr class="head_tr">
