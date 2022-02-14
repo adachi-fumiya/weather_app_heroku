@@ -14,9 +14,11 @@
     <form action="{{route('weather.search')}}" method="post">
       @csrf
       <div class="post_code_input">
-        <input type="text" imputmode="numeric" pattern="\d*" maxlength="3" name="post_code1" placeholder="870" required>
-        <span>-</span>
-        <input type="text" imputmode="numeric" pattern="\d*" maxlength="4" name="post_code2" placeholder="0026" required>
+        <div class="zip">
+          <input type="text" imputmode="numeric" pattern="\d*" maxlength="3" name="post_code1" placeholder="870" required>
+          <span>-</span>
+          <input type="text" imputmode="numeric" pattern="\d*" maxlength="4" name="post_code2" placeholder="0026" required>
+        </div>
         <button type="submit" class="btn btn-primary search">検索する</button>
       </div>
       @if (session('error_message'))

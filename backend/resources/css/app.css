@@ -22,21 +22,25 @@ table {
 
 .post_code_input {
   display: flex;
+  justify-content:flex-start;
   align-items: center;
 }
 
-.post_code_input > span {
-  margin: 0 1rem 0 1rem;
+.zip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 20%;
+}
+
+input {
+  padding: 0.4rem;
+  width: 45%;
 }
 
 .search {
   margin-left: 2rem;
-}
-
-input {
-  display: block;
-  padding: 0.4rem;
-  width: 15%;
 }
 
 .error_message {
@@ -54,13 +58,17 @@ td {
   td {
     width: 30%;
   }
-
-	td:first-child{
+  
+  td:first-child{
     width: 40%;
   }
 
+  .zip {
+    width: 60%;
+  }
+
   input {
-    width: 20%;
+    width: 40%;
   }
 
   .city_text {
@@ -69,6 +77,6 @@ td {
   }
 
   .post_code_input {
-    justify-content: center;
+    justify-content: space-between;
   }
 }
